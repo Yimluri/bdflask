@@ -1,0 +1,76 @@
+
+{%extends "plantilla.html"%}
+
+
+{%block body%}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show mt-5" role="alert">
+        <strong>{{message}}</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class = "row">
+        <div class="col-md-6">
+            <!--aqui va el formulario-->
+ <div class="container-lg">
+ <form action="/guardarAlbum" method="POST">
+        <div class="mb-3">
+            <h2>Album</h2>
+            <input type="text" name="txtTitulo" class="form-control border-info border-opacity-75 rounded" id="txtTitulo">
+        </div>
+        <div class="mb-3">
+            <h2>Artista</h2>
+            <input type="text" name="txtArtista" class="form-control border-info border-opacity-75 rounded" id="txtArtista">
+        </div>
+        <div class="mb-3">
+            <h2>Lanzamiento</h2>
+            <input type="text" name="txtAnio" class="form-control border-info border-opacity-75 rounded" id="txtAnio">
+        </div>
+        <Button type="submit" class="btn btn-outline-info mt-3 mb-5">Enviar</Button>
+    </form>
+</div>
+        </div>
+        <div class="col-md-6">
+            <div class="container">
+            <!--aqui va la tabla-->
+            <table class="table table-striped mt-5">
+                <thead>
+                    <tr class="table-info">
+                        <td class="table-info">ID:</td>
+                        <td class="table-info">ALBUM:</td>
+                        <TD class="table-info">ARTISTA:</TD>
+                        <td class="table-info">AÑO:</td>
+                        <td class="table-info">Operaciones</td>
+                        <td class="table-info"></td>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {%for album in albums%}
+                    <tr class="table-info">
+                       <td class="table-info">{{album.0}}</td>
+                       <td class="table-info">{{album.1}}</td>
+                       <td class="table-info">{{album.2}}</td>
+                       <td class="table-info">{{album.3}}</td>
+                       <td class="table-info"><a href="/editar/{{album.0}}" class="btn btn-info"> Editar</a></td>
+                       <td class="table-info"><a href="/delete/{{album.0}}" class="btn btn-dark" id="eliminar">Eliminar</a></td>
+                       <script>
+                        document.getElementById('eliminar').addEventListener('click', function() { 
+                            confirm('Seguro que quieres eliminar el albúm?');});
+                    </script>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+
+    {%endblock%}
