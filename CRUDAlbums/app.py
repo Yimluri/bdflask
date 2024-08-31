@@ -12,6 +12,8 @@ mysql = MySQL(app)
 app.secret_key = 'mysecretkey'
 
 @app.route('/')
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'jpg', 'png'}
 def index():
      try:
         cursor= mysql.connection.cursor()

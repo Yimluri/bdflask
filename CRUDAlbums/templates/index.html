@@ -25,6 +25,10 @@
             <input type="text" name="txtTitulo" class="form-control border-info border-opacity-75 rounded" id="txtTitulo">
         </div>
         <div class="mb-3">
+            <h2>Portada</h2>
+            <input type="file" name="file" accept=".jpg, .png" required>
+        </div>
+        <div class="mb-3">
             <h2>Artista</h2>
             <input type="text" name="txtArtista" class="form-control border-info border-opacity-75 rounded" id="txtArtista">
         </div>
@@ -68,9 +72,9 @@
                     {%endfor%}
                 </tbody>
             </table>
+            <img src="{{ url_for('static', filename='Jinyoung.jpg') }}" alt="esta es una prueba para utilizar una imagen con Flask">
         </div>
         </div>
+        
     </div>
-
-
     {%endblock%}
